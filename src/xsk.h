@@ -230,6 +230,11 @@ static inline void *xsk_umem__get_data(void *umem_area, __u64 addr)
 	return &((char *)umem_area)[addr];
 }
 
+static inline void xsk_umem__set_txtime(void *umem_area, __u64 addr, __u32 umem_headroom, __s64 txtime)
+{
+	*(__s64 *)(&((char *)umem_area)[addr] + umem_headroom - XDP_TXTIME_LEN) = txtime;
+}
+
 static inline __u64 xsk_umem__extract_addr(__u64 addr)
 {
 	return addr & XSK_UNALIGNED_BUF_ADDR_MASK;

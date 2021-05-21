@@ -25,6 +25,7 @@
  * application.
  */
 #define XDP_USE_NEED_WAKEUP (1 << 3)
+#define XDP_TXTIME (1 << 4)
 
 /* Flags for xsk_umem_config flags */
 #define XDP_UMEM_UNALIGNED_CHUNK_FLAG (1 << 0)
@@ -39,6 +40,7 @@ struct sockaddr_xdp {
 
 /* XDP_RING flags */
 #define XDP_RING_NEED_WAKEUP (1 << 0)
+#define XDP_RING_USE_TXTIME (1 << 1)
 
 struct xdp_ring_offset {
 	__u64 producer;
@@ -106,6 +108,10 @@ struct xdp_desc {
 	__u32 options;
 };
 
+#define XDP_DESC_OPTION_TXTIME (1 << 0)
+
 /* UMEM descriptor is __u64 */
+
+#define XDP_TXTIME_LEN (sizeof(__s64))
 
 #endif /* _LINUX_IF_XDP_H */
